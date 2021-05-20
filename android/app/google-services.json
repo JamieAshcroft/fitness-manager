@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "269818928038",
+    "project_id": "fitness-manager-f578e",
+    "storage_bucket": "fitness-manager-f578e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269818928038:android:86dede8f890997c9c98d67",
+        "android_client_info": {
+          "package_name": "com.example.fitness_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "269818928038-7isnpivvhs5t23287ukt7lqg6jib8sk8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fitness_management",
+            "certificate_hash": "9c8e18b039a537332ca9a8655365266be0efc827"
+          }
+        },
+        {
+          "client_id": "269818928038-ekomi2052j0od5v9h3aej8p37rpp4rbj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKg6hbly5MI48sXC4rAdlZJDX0m9bLhTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "269818928038-ekomi2052j0od5v9h3aej8p37rpp4rbj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
