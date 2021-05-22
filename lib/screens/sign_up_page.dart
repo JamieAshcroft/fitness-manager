@@ -53,6 +53,21 @@ class SignUpWidget extends StatelessWidget {
                   provider.googleLogin();
                 },
                 label: Text('Sign Up with Google')),
+            SizedBox(
+              height: 16,
+            ),
+            ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  onPrimary: Colors.black,
+                  minimumSize: Size(double.infinity, 50),
+                ),
+                onPressed: () {},
+                icon: FaIcon(
+                  FontAwesomeIcons.addressBook,
+                  color: Colors.red,
+                ),
+                label: Text('Sign Up with email')),
             SizedBox(height: 40),
             RichText(
               text: TextSpan(
