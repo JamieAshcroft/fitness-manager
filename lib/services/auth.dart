@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class GoogleSignInProvider extends ChangeNotifier {
+class AuthProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool get isAnonymous => _auth.currentUser!.isAnonymous;
 
   GoogleSignInAccount? _user;
   GoogleSignInAccount get user => _user!;
@@ -28,8 +30,21 @@ class GoogleSignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future logout() async {
-    await googleSignIn.disconnect();
+  Future signInAnon() async {
+    try {
+      UserCredential result = await _auth.signInAnonymously();
+      User? user = result.user;
+      return user;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  logout() async {
+    if (googleSignIn.currentUser?.id != null) {
+      await googleSignIn.disconnect();
+    }
     FirebaseAuth.instance.signOut();
   }
 }

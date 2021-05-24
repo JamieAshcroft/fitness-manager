@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => GoogleSignInProvider(),
+        create: (context) => AuthProvider(),
         child: MaterialApp(
           routes: {
             '/profile': (context) => LoggedInWidget(),
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           },
           debugShowCheckedModeBanner: false,
           title: title,
-          theme: ThemeData.dark().copyWith(accentColor: Colors.indigo),
+          theme: ThemeData.light().copyWith(accentColor: Colors.black),
           home: HomePage(),
         ),
       );

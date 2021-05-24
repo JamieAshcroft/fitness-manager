@@ -3,6 +3,7 @@ import 'package:fitness_management/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_management/screens/sign_up_page.dart';
 import 'package:fitness_management/screens/profile_page.dart';
+import 'package:fitness_management/features/side_menu.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -10,6 +11,8 @@ class HomePage extends StatelessWidget {
         body: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
+            // final authProvider = Provider.of<AuthProvider>(context); <---- Empty condiiton
+            // if (authProvider.isAnonymous) {}
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasData) {
@@ -57,6 +60,37 @@ class _HomePageDisplayState extends State<HomePageDisplay> {
         onPageChanged: _onPageChanged,
         physics: NeverScrollableScrollPhysics(),
       ),
+      appBar: AppBar(
+        title: Text(
+          'KidCal',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.normal),
+        ),
+        iconTheme: IconThemeData(color: Colors.black),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications_none),
+            color: Colors.black,
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.search),
+            color: Colors.black,
+            onPressed: () {},
+          ),
+        ],
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.white, Colors.white],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+      ),
+      drawer: SideMenu(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: this._selectedIndex,
@@ -83,12 +117,15 @@ class _MainDisplayWidgetState extends State<MainDisplayWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('GENERAL KENOBI'),
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      // title: Text('GENERAL KENOBI'),
+      //centerTitle: true,
+      //leading: IconButton(
+      // icon: Icon(Icons.menu),
+      // onPressed: () {},/
+      // )),
       body: Container(
-        color: Colors.blueGrey.shade900,
+        color: Colors.blueGrey[100],
       ),
     );
   }
