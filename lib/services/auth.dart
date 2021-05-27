@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness_management/features/user.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -30,11 +31,16 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  UserLog? _fromFirebaseUser(User user) {
+    // ignore: unnecessary_null_comparison
+    return user != null ? UserLog(uid: user.uid) : null;
+  }
+
   Future signInAnon() async {
     try {
       UserCredential result = await _auth.signInAnonymously();
       User? user = result.user;
-      return user;
+      return _fromFirebaseUser(user!);
     } catch (e) {
       print(e.toString());
       return null;

@@ -114,7 +114,7 @@ class SignUpWidget extends StatelessWidget {
                               print('error signing in');
                             } else {
                               print('signed in');
-                              print(result);
+                              print(result.uid);
                             }
                           },
                           icon: FaIcon(
