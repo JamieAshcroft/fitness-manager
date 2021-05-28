@@ -11,14 +11,13 @@ class AuthProvider extends ChangeNotifier {
   GoogleSignInAccount? _user;
   GoogleSignInAccount get user => _user!;
 
+  // sign in with google
   Future googleLogin() async {
     try {
       final googleUser = await googleSignIn.signIn();
       if (googleUser == null) return;
       _user = googleUser;
-
       final googleAuth = await googleUser.authentication;
-
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
@@ -27,7 +26,6 @@ class AuthProvider extends ChangeNotifier {
     } catch (e) {
       print(e.toString());
     }
-
     notifyListeners();
   }
 
@@ -36,6 +34,33 @@ class AuthProvider extends ChangeNotifier {
     return user != null ? UserLog(uid: user.uid) : null;
   }
 
+  // sign up with email and password
+  Future registerUserWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      return _fromFirebaseUser(user!);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  // sign in with email and password
+  Future signInWithEmailAndPassword(String email, String password) async {
+    try {
+      UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User? user = result.user;
+      return _fromFirebaseUser(user!);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  // sign in anonymously
   Future signInAnon() async {
     try {
       UserCredential result = await _auth.signInAnonymously();
@@ -47,6 +72,7 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  // logout button - works for all login instances
   logout() async {
     if (googleSignIn.currentUser?.id != null) {
       await googleSignIn.disconnect();

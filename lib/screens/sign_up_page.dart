@@ -1,8 +1,11 @@
+import 'package:fitness_management/screens/register_page.dart';
 import 'package:fitness_management/services/auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:fitness_management/screens/sign_in_page.dart';
 
 class SignUpWidget extends StatelessWidget {
   final AuthProvider _auth = AuthProvider();
@@ -40,7 +43,7 @@ class SignUpWidget extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Hey There,\nWelcome Back',
+                          'Hey There,\nWelcome',
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -52,7 +55,7 @@ class SignUpWidget extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Login to your account to continue',
+                          'Sign-up or login to your account to continue',
                           style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -92,7 +95,12 @@ class SignUpWidget extends StatelessWidget {
                             onPrimary: Colors.black,
                             minimumSize: Size(double.infinity, 50),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RegisterWidget()));
+                          },
                           icon: FaIcon(
                             FontAwesomeIcons.addressBook,
                             color: Colors.red,
@@ -123,20 +131,22 @@ class SignUpWidget extends StatelessWidget {
                           ),
                           label: Text('Continue as guest')),
                       SizedBox(height: 40),
-                      RichText(
-                        text: TextSpan(
-                          text: 'Already have an account? ',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: 'Log in',
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline),
+                      Column(
+                        children: [
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 16),
                             ),
-                          ],
-                        ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignInWidget()));
+                            },
+                            child:
+                                const Text('Already have an account? Log in'),
+                          ),
+                        ],
                       ),
                       Spacer(),
                     ],

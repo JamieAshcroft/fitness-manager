@@ -8,10 +8,6 @@ class LoggedInWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Logged In'),
-        centerTitle: true,
-      ),
       body: Container(
         alignment: Alignment.center,
         color: Colors.blueGrey.shade100,
