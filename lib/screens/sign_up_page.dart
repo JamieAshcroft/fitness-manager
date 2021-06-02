@@ -87,25 +87,23 @@ class SignUpWidget extends StatelessWidget {
                         height: 16,
                       ),
                       ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14.0),
-                            ),
-                            primary: Colors.white,
-                            onPrimary: Colors.black,
-                            minimumSize: Size(double.infinity, 50),
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14.0),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RegisterWidget()));
-                          },
-                          icon: FaIcon(
-                            FontAwesomeIcons.addressBook,
-                            color: Colors.red,
-                          ),
-                          label: Text('Sign Up with email')),
+                          primary: Colors.white,
+                          onPrimary: Colors.black,
+                          minimumSize: Size(double.infinity, 50),
+                        ),
+                        onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => RegisterWidget())),
+                        icon: FaIcon(
+                          FontAwesomeIcons.addressBook,
+                          color: Colors.red,
+                        ),
+                        label: Text('Sign Up with email'),
+                      ),
                       SizedBox(height: 16),
                       ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
@@ -137,12 +135,9 @@ class SignUpWidget extends StatelessWidget {
                             style: TextButton.styleFrom(
                               textStyle: const TextStyle(fontSize: 16),
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SignInWidget()));
-                            },
+                            onPressed: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => SignInWidget())),
                             child:
                                 const Text('Already have an account? Log in'),
                           ),

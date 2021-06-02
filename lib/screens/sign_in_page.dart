@@ -3,6 +3,7 @@ import 'package:fitness_management/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class SignInWidget extends StatefulWidget {
   @override
@@ -10,7 +11,6 @@ class SignInWidget extends StatefulWidget {
 }
 
 class _SignInWidgetState extends State<SignInWidget> {
-  final AuthProvider _auth = AuthProvider();
   final _formKey = GlobalKey<FormState>();
 
   String email = '';
@@ -19,6 +19,8 @@ class _SignInWidgetState extends State<SignInWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final _auth = Provider.of<AuthProvider>(context, listen: false);
+
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -77,6 +79,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                           TextFormField(
                             decoration: textInputDecoration.copyWith(
                                 hintText: 'Enter your email address'),
+                            textCapitalization: TextCapitalization.none,
                             validator: (val) => val!.isEmpty
                                 ? 'Enter your email address'
                                 : null,
@@ -108,10 +111,13 @@ class _SignInWidgetState extends State<SignInWidget> {
                             ),
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                dynamic result =
+                                final result =
                                     await _auth.signInWithEmailAndPassword(
                                         email, password);
-                                if (result == null) {
+
+                                if (result) {
+                                  Navigator.of(context).pop();
+                                } else {
                                   setState(() => error =
                                       'Invalid Credentials: Please try again');
                                 }

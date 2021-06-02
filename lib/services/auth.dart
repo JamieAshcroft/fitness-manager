@@ -40,7 +40,8 @@ class AuthProvider extends ChangeNotifier {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
-      return _fromFirebaseUser(user!);
+      _fromFirebaseUser(user!);
+      return true;
     } catch (e) {
       print(e.toString());
       return null;
@@ -48,15 +49,16 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // sign in with email and password
-  Future signInWithEmailAndPassword(String email, String password) async {
+  Future<bool> signInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
-      return _fromFirebaseUser(user!);
+      _fromFirebaseUser(user!);
+      return true;
     } catch (e) {
       print(e.toString());
-      return null;
+      return false;
     }
   }
 

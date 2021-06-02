@@ -5,6 +5,7 @@ import 'package:fitness_management/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class RegisterWidget extends StatefulWidget {
   @override
@@ -12,7 +13,6 @@ class RegisterWidget extends StatefulWidget {
 }
 
 class _RegisterWidgetState extends State<RegisterWidget> {
-  final AuthProvider _auth = AuthProvider();
   final _formKey = GlobalKey<FormState>();
 
   String email = '';
@@ -21,6 +21,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final _auth = Provider.of<AuthProvider>(context, listen: false);
+
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -79,6 +81,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           TextFormField(
                             decoration: textInputDecoration.copyWith(
                                 hintText: 'Enter an email address'),
+                            textCapitalization: TextCapitalization.none,
                             validator: (val) => val!.isEmpty
                                 ? 'Enter your email address'
                                 : null,
@@ -110,10 +113,13 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                             ),
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                dynamic result = await _auth
+                                final result = await _auth
                                     .registerUserWithEmailAndPassword(
                                         email, password);
-                                if (result == null) {
+
+                                if (result) {
+                                  Navigator.of(context).pop();
+                                } else {
                                   setState(() => error =
                                       'Please supply a valid email address');
                                 }
